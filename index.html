@@ -16,6 +16,8 @@
   body { overscroll-behavior: none; }
   a { color: #0B4FD6; text-decoration: none; }
   a:hover { color: #072C7A; }
+  @keyframes carrossel10 { 0% { opacity: 0; transform: scale(1); } 2% { opacity: 1; } 10% { opacity: 1; } 12% { opacity: 0; transform: scale(1.08); } 100% { opacity: 0; transform: scale(1.08); } }
+  @keyframes carrossel10Dot { 0% { background: #0B4FD6; width: 32px; } 10% { background: #0B4FD6; width: 32px; } 12% { background: #C7DAFB; width: 12px; } 100% { background: #C7DAFB; width: 12px; } }
   @keyframes carrosselDot { 0% { background: #0B4FD6; width: 36px; } 30% { background: #0B4FD6; width: 36px; } 36% { background: #C7DAFB; width: 14px; } 100% { background: #C7DAFB; width: 14px; } }
   @keyframes carrossel { 0% { opacity: 0; transform: scale(1); } 5% { opacity: 1; } 30% { opacity: 1; } 36% { opacity: 0; transform: scale(1.1); } 100% { opacity: 0; transform: scale(1.1); } }
 </style>
@@ -98,6 +100,44 @@
         <div style="position:absolute;right:-8px;bottom:36px;width:96px;height:96px;border-radius:50%;background:#0B4FD6"></div>
         <div style="position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#E8EFFC">
           <img src="assets/rayllon.png" alt="Rayllon Soares Pessoa" style="width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Coautora" data-screen-label="Coautora" data-anim="stagger" data-in-step="120" data-speaker-notes="Apresentação da coautora: formação e atuação." style="width:100%;height:100%;background:#fff;color:#08172E;font-family:Manrope,sans-serif;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) 700px" data-om-slide-id="674c3581">
+    <div style="padding:64px 64px 64px 120px;display:flex;flex-direction:column;justify-content:center;gap:20px;min-width:0">
+      <div data-in="" style="display:flex;align-items:center;gap:20px">
+        <div style="width:44px;height:8px;background:#0B4FD6"></div>
+        <div style="font-size:25px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#0B4FD6">Coautora</div>
+      </div>
+      <h2 data-in="" style="margin:0;font-family:Anton,sans-serif;font-size:72px;line-height:1.08;text-transform:uppercase;color:#0B4FD6">Nome da Coautora</h2>
+      <div style="display:flex;flex-direction:column;gap:6px">
+          <div data-in="" style="display:grid;grid-template-columns:24px 1fr;gap:20px;align-items:start"><div style="width:24px;height:4px;background:#0B4FD6;margin-top:15px"></div><span style="font-size:24px;line-height:1.35;font-weight:600">Mestre em Química – UFPB</span></div>
+          <div data-in="" style="display:grid;grid-template-columns:24px 1fr;gap:20px;align-items:start"><div style="width:24px;height:4px;background:#0B4FD6;margin-top:15px"></div><span style="font-size:24px;line-height:1.35;font-weight:600">Especialista em Docência para Educação Profissional e Tecnológica – IFES</span></div>
+          <div data-in="" style="display:grid;grid-template-columns:24px 1fr;gap:20px;align-items:start"><div style="width:24px;height:4px;background:#0B4FD6;margin-top:15px"></div><span style="font-size:24px;line-height:1.35;font-weight:600">Especialista em Educação Digital e Inovação Pedagógica na Educação Básica</span></div>
+          <div data-in="" style="display:grid;grid-template-columns:24px 1fr;gap:20px;align-items:start"><div style="width:24px;height:4px;background:#0B4FD6;margin-top:15px"></div><span style="font-size:24px;line-height:1.35;font-weight:600">Licenciada e Bacharela em Química – UFPB</span></div>
+          <div data-in="" style="display:grid;grid-template-columns:24px 1fr;gap:20px;align-items:start"><div style="width:24px;height:4px;background:#0B4FD6;margin-top:15px"></div><span style="font-size:24px;line-height:1.35;font-weight:600">Gerente Operacional de Educação a Distância e Inovação Educacional – SEE/PB</span></div>
+          <div data-in="" style="display:grid;grid-template-columns:24px 1fr;gap:20px;align-items:start"><div style="width:24px;height:4px;background:#0B4FD6;margin-top:15px"></div><span style="font-size:24px;line-height:1.35;font-weight:600">Professora de Ciências e Química no Ensino Fundamental e Médio</span></div>
+          <div data-in="" style="display:grid;grid-template-columns:24px 1fr;gap:20px;align-items:start"><div style="width:24px;height:4px;background:#0B4FD6;margin-top:15px"></div><span style="font-size:24px;line-height:1.35;font-weight:600">Professora de Química no Ensino Superior</span></div>
+          <div data-in="" style="display:grid;grid-template-columns:24px 1fr;gap:20px;align-items:start"><div style="width:24px;height:4px;background:#0B4FD6;margin-top:15px"></div><span style="font-size:24px;line-height:1.35;font-weight:600">Pesquisadora em síntese orgânica na área de Química Medicinal</span></div>
+      </div>
+      <div data-in="" style="display:flex;flex-direction:column;gap:8px;background:#E8EFFC;padding:20px 28px">
+        <div style="font-size:24px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#40526E">Linhas de pesquisa</div>
+        <div style="font-size:28px;font-weight:800;color:#0B4FD6">Química Orgânica</div>
+        <div style="font-size:25px;line-height:1.4;color:#22344F">Síntese de híbridos com potencial atividade biológica</div>
+      </div>
+      <div data-in="" style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:24px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#40526E">Áreas de atuação</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="border:2px solid #C7DAFB;padding:6px 14px;font-size:22px;font-weight:700;color:#0B4FD6;white-space:nowrap">Formação Docente</span><span style="border:2px solid #C7DAFB;padding:6px 14px;font-size:22px;font-weight:700;color:#0B4FD6;white-space:nowrap">Educação Híbrida</span><span style="border:2px solid #C7DAFB;padding:6px 14px;font-size:22px;font-weight:700;color:#0B4FD6;white-space:nowrap">Metodologias Ativas</span><span style="border:2px solid #C7DAFB;padding:6px 14px;font-size:22px;font-weight:700;color:#0B4FD6;white-space:nowrap">Tecnologias Educacionais</span><span style="border:2px solid #C7DAFB;padding:6px 14px;font-size:22px;font-weight:700;color:#0B4FD6;white-space:nowrap">Síntese Orgânica</span><span style="border:2px solid #C7DAFB;padding:6px 14px;font-size:22px;font-weight:700;color:#0B4FD6;white-space:nowrap">Química Orgânica</span><span style="border:2px solid #C7DAFB;padding:6px 14px;font-size:22px;font-weight:700;color:#0B4FD6;white-space:nowrap">Gamificação</span></div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;padding:80px 120px 80px 0;box-sizing:border-box">
+      <div data-in-photo="" style="position:relative;width:520px;height:520px">
+        <div style="position:absolute;inset:-28px;border-radius:50%;border:6px solid #0B4FD6"></div>
+        <div style="position:absolute;right:-8px;bottom:36px;width:96px;height:96px;border-radius:50%;background:#0B4FD6"></div>
+        <div style="position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#E8EFFC">
+          <img src="assets/coautora.jpeg" alt="Coautora" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block">
         </div>
       </div>
     </div>
@@ -337,77 +377,67 @@
     <div style="font-size:24px;color:#6B7B94">Fonte: Elaborado pelo autor (2026).</div>
   </section>
 
-  <section data-label="Ferramentas" data-anim="stagger" data-in-step="420" data-screen-label="10" data-speaker-notes="Estratégias com as ferramentas digitais articuladas ao Classroom. Fotos: projetos autorais apresentados na Expotech Burity." style="width:100%;height:100%;background:#fff;color:#08172E;font-family:Manrope,sans-serif;padding:88px 120px 72px;box-sizing:border-box;display:flex;flex-direction:column;gap:40px" data-om-slide-id="2990e7ff">
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:80px;flex:1;min-height:0;align-items:center">
-      <div style="display:flex;flex-direction:column;gap:26px;justify-content:center;min-height:0">
-        <div style="display:flex;align-items:center;gap:20px">
-          <div style="width:44px;height:8px;background:#0B4FD6"></div>
-          <div style="font-size:25px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#0B4FD6">Ferramentas digitais</div>
-        </div>
-        <h2 style="margin:0;font-family:Anton,sans-serif;font-size:60px;line-height:1.12;text-transform:uppercase">Estratégias articuladas ao Google Classroom</h2>
-        <div data-in="" style="display:grid;grid-template-columns:28px 1fr;gap:22px;align-items:start">
-          <div style="width:28px;height:4px;background:#0B4FD6;margin-top:22px"></div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="font-size:30px;font-weight:800">Revisão gamificada</div>
-            <div style="font-size:25px;line-height:1.4;color:#40526E">Kahoot em atividades de revisão dos conteúdos de Segurança da Informação.</div>
-          </div>
-        </div>
-        <div data-in="" style="display:grid;grid-template-columns:28px 1fr;gap:22px;align-items:start">
-          <div style="width:28px;height:4px;background:#0B4FD6;margin-top:22px"></div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="font-size:30px;font-weight:800">Construção colaborativa</div>
-            <div style="font-size:25px;line-height:1.4;color:#40526E">Padlet para organizar ideias dos projetos; Canva e PowerPoint para as apresentações.</div>
-          </div>
-        </div>
-        <div data-in="" style="display:grid;grid-template-columns:28px 1fr;gap:22px;align-items:start">
-          <div style="width:28px;height:4px;background:#0B4FD6;margin-top:22px"></div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="font-size:30px;font-weight:800">Programação e algoritmos</div>
-            <div style="font-size:25px;line-height:1.4;color:#40526E">Python e Portugol no desenvolvimento de soluções de criptografia.</div>
-          </div>
-        </div>
-        <div data-in="" style="display:grid;grid-template-columns:28px 1fr;gap:22px;align-items:start">
-          <div style="width:28px;height:4px;background:#0B4FD6;margin-top:22px"></div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <div style="font-size:30px;font-weight:800">Prototipagem e automação</div>
-            <div style="font-size:25px;line-height:1.4;color:#40526E">Tinkercad para simulações e Arduino IDE para soluções práticas de automação.</div>
-          </div>
+  <section data-label="Ferramentas" data-anim="stagger" data-in-step="420" data-screen-label="10" data-speaker-notes="Estratégias com as ferramentas digitais articuladas ao Classroom. " style="width:100%;height:100%;background:#fff;color:#08172E;font-family:Manrope,sans-serif;padding:88px 120px 72px;box-sizing:border-box;display:flex;flex-direction:column;gap:40px" data-om-slide-id="2990e7ff">
+    <div style="display:flex;align-items:center;gap:20px">
+      <div style="width:44px;height:8px;background:#0B4FD6"></div>
+      <div style="font-size:25px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#0B4FD6">Ferramentas digitais</div>
+    </div>
+    <h2 style="margin:0;font-family:Anton,sans-serif;font-size:74px;line-height:1.12;text-transform:uppercase">Estratégias articuladas ao Google Classroom</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 96px;flex:1;align-content:center">
+      <div data-in="" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:28px;align-items:start">
+        <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="#0B4FD6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="4"></rect><path d="M7 11v3M5.5 12.5h3"></path><circle cx="16" cy="11.5" r="0.7" fill="#0B4FD6"></circle><circle cx="18" cy="13.5" r="0.7" fill="#0B4FD6"></circle></svg>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:34px;font-weight:800">Revisão gamificada</div>
+          <div style="font-size:28px;line-height:1.45;color:#40526E">Kahoot em atividades de revisão dos conteúdos de Segurança da Informação.</div>
         </div>
       </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:22px;justify-self:center">
-        <div style="position:relative;overflow:hidden;background:#E8EFFC;height:640px;aspect-ratio:4 / 5">
-        <img src="assets/foto-1.png" alt="Protótipo com display LCD apresentado por estudante" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel 12s ease-in-out infinite;animation-delay:0s">
-        <img src="assets/foto-2.png" alt="Estudante usando óculos com sensor ultrassônico e Arduino" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel 12s ease-in-out infinite;animation-delay:4s">
-        <img src="assets/foto-3.png" alt="Óculos com placa Arduino Leonardo em detalhe" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel 12s ease-in-out infinite;animation-delay:8s">
+      <div data-in="" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:28px;align-items:start">
+        <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="#0B4FD6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8.5" r="3"></circle><circle cx="16" cy="8.5" r="3"></circle><path d="M2.5 19c.5-3 2.7-4.8 5.5-4.8s5 1.8 5.5 4.8M10.5 19c.5-3 2.7-4.8 5.5-4.8s5 1.8 5.5 4.8"></path></svg>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:34px;font-weight:800">Construção colaborativa</div>
+          <div style="font-size:28px;line-height:1.45;color:#40526E">Padlet para organizar ideias dos projetos; Canva e PowerPoint para as apresentações.</div>
+        </div>
       </div>
-        <div style="display:flex;gap:10px;align-items:center"><div style="height:14px;width:14px;background:#C7DAFB;border-radius:7px;animation:carrosselDot 12s ease-in-out infinite;animation-delay:0s"></div><div style="height:14px;width:14px;background:#C7DAFB;border-radius:7px;animation:carrosselDot 12s ease-in-out infinite;animation-delay:4s"></div><div style="height:14px;width:14px;background:#C7DAFB;border-radius:7px;animation:carrosselDot 12s ease-in-out infinite;animation-delay:8s"></div></div>
+      <div data-in="" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:28px;align-items:start">
+        <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="#0B4FD6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4.5l-3 15"></path></svg>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:34px;font-weight:800">Programação e algoritmos</div>
+          <div style="font-size:28px;line-height:1.45;color:#40526E">Python e Portugol no desenvolvimento de soluções de criptografia.</div>
+        </div>
+      </div>
+      <div data-in="" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:28px;align-items:start">
+        <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="#0B4FD6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1.5"></rect><rect x="9.5" y="9.5" width="5" height="5"></rect><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"></path></svg>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-size:34px;font-weight:800">Prototipagem e automação</div>
+          <div style="font-size:28px;line-height:1.45;color:#40526E">Tinkercad para simulações e Arduino IDE para soluções práticas de automação.</div>
+        </div>
       </div>
     </div>
-    <div style="display:flex;align-items:center;justify-content:center;gap:56px;flex-wrap:wrap;border-top:2px solid #E8EFFC;padding-top:28px">
-        <div style="display:flex;align-items:center;gap:12px">
-          <img src="assets/icon-python.png" alt="Python" style="width:52px;height:52px;object-fit:contain">
-          <span style="font-size:26px;font-weight:700;color:#22344F">Python</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <img src="assets/icon-portugol.png" alt="Portugol" style="width:52px;height:52px;object-fit:contain">
-          <span style="font-size:26px;font-weight:700;color:#22344F">Portugol</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <img src="assets/icon-arduino-ide.png" alt="Arduino IDE" style="width:52px;height:52px;object-fit:contain">
-          <span style="font-size:26px;font-weight:700;color:#22344F">Arduino IDE</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <img src="assets/icon-kahoot.png" alt="Kahoot" style="width:52px;height:52px;object-fit:contain">
-          <span style="font-size:26px;font-weight:700;color:#22344F">Kahoot</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <img src="assets/icon-canva.png" alt="Canva" style="width:52px;height:52px;object-fit:contain">
-          <span style="font-size:26px;font-weight:700;color:#22344F">Canva</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px">
-          <img src="assets/icon-padlet.png" alt="Padlet" style="width:52px;height:52px;object-fit:contain">
-          <span style="font-size:26px;font-weight:700;color:#22344F">Padlet</span>
-        </div>
+    <div data-in="" style="display:flex;align-items:center;justify-content:center;gap:64px;flex-wrap:wrap;border-top:2px solid #E8EFFC;padding-top:32px">
+      <div style="display:flex;align-items:center;gap:16px">
+        <img src="assets/icon-python.png" alt="Python" style="width:72px;height:72px;object-fit:contain">
+        <span style="font-size:30px;font-weight:700;color:#22344F">Python</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <img src="assets/icon-portugol.png" alt="Portugol" style="width:72px;height:72px;object-fit:contain">
+        <span style="font-size:30px;font-weight:700;color:#22344F">Portugol</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <img src="assets/icon-arduino-ide.png" alt="Arduino IDE" style="width:72px;height:72px;object-fit:contain">
+        <span style="font-size:30px;font-weight:700;color:#22344F">Arduino IDE</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <img src="assets/icon-kahoot.png" alt="Kahoot" style="width:72px;height:72px;object-fit:contain">
+        <span style="font-size:30px;font-weight:700;color:#22344F">Kahoot</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <img src="assets/icon-canva.png" alt="Canva" style="width:72px;height:72px;object-fit:contain">
+        <span style="font-size:30px;font-weight:700;color:#22344F">Canva</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <img src="assets/icon-padlet.png" alt="Padlet" style="width:72px;height:72px;object-fit:contain">
+        <span style="font-size:30px;font-weight:700;color:#22344F">Padlet</span>
+      </div>
     </div>
   </section>
 
@@ -774,82 +804,94 @@
 
   
 
-  <section data-label="Protagonismo" data-screen-label="11" data-steps="4" data-step-mode="solo" data-speaker-notes="Projetos autorais apresentados na Expotech Burity. Avance com o passador (ou clique nos cards) para mostrar cada projeto." style="width:100%;height:100%;background:#fff;color:#08172E;font-family:Manrope,sans-serif;padding:80px 120px;box-sizing:border-box;display:flex;flex-direction:column;gap:30px">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:40px">
+  
+
+  <section data-label="Projetos (lista)" data-screen-label="11b" data-steps="6" data-step-mode="solo" data-speaker-notes="Alternativa ao slide anterior: avance com a seta para apresentar cada um dos seis projetos." style="width:100%;height:100%;background:#fff;color:#08172E;font-family:Manrope,sans-serif;padding:80px 120px;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) 460px;gap:64px" data-om-slide-id="8ef8a87e">
+    <div style="display:flex;flex-direction:column;gap:28px;min-width:0;min-height:0">
       <div style="display:flex;align-items:center;gap:20px">
         <div style="width:44px;height:8px;background:#0B4FD6"></div>
-        <div style="font-size:25px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#0B4FD6">Expotech Burity · projetos autorais</div>
+        <div style="font-size:25px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#0B4FD6">Projetos desenvolvidos</div>
       </div>
-      <div data-step-dots="" style="display:flex;gap:12px"></div>
+      <h2 style="margin:0;font-family:Anton,sans-serif;font-size:54px;line-height:1.12;text-transform:uppercase">Projetos desenvolvidos pelos estudantes</h2>
+      <div style="display:flex;gap:18px;padding-top:10px">
+        <div data-step-tab="0" data-tab-axis="y" title="Projeto de Criptografia" style="width:108px;height:108px;background:#0B4FD6;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 300ms ease,color 300ms ease,transform 300ms ease,box-shadow 300ms ease"><svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="1.5"></rect><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"></path><circle cx="12" cy="15.5" r="1.3"></circle></svg></div>
+        <div data-step-tab="1" data-tab-axis="y" title="Autenticação e suas Tecnologias" style="width:108px;height:108px;background:#0B4FD6;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 300ms ease,color 300ms ease,transform 300ms ease,box-shadow 300ms ease"><svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="4"></circle><path d="M12 12h9M18 12v3M15 12v2"></path></svg></div>
+        <div data-step-tab="2" data-tab-axis="y" title="Sensor Inteligente de Iluminação" style="width:108px;height:108px;background:#0B4FD6;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 300ms ease,color 300ms ease,transform 300ms ease,box-shadow 300ms ease"><svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"></path><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"></path></svg></div>
+        <div data-step-tab="3" data-tab-axis="y" title="Projeto de Contagem de Alunos" style="width:108px;height:108px;background:#0B4FD6;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 300ms ease,color 300ms ease,transform 300ms ease,box-shadow 300ms ease"><svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3.2"></circle><path d="M3 19.5c.6-3.3 3-5.2 6-5.2s5.4 1.9 6 5.2"></path><path d="M17 8v6M14 11h6"></path></svg></div>
+        <div data-step-tab="4" data-tab-axis="y" title="Horta Inteligente" style="width:108px;height:108px;background:#0B4FD6;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 300ms ease,color 300ms ease,transform 300ms ease,box-shadow 300ms ease"><svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8"></path><path d="M12 13c0-4 3-7 8-7 0 4-3 7-8 7z"></path><path d="M12 15c0-3.3-2.5-6-7-6 0 3.3 2.5 6 7 6z"></path></svg></div>
+        <div data-step-tab="5" data-tab-axis="y" title="Óculos com Sensor de Proximidade" style="width:108px;height:108px;background:#0B4FD6;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 300ms ease,color 300ms ease,transform 300ms ease,box-shadow 300ms ease"><svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="14" r="3.5"></circle><circle cx="17.5" cy="14" r="3.5"></circle><path d="M10 14h4M3 14l1.5-6h2M21 14l-1.5-6h-2"></path></svg></div>
+      </div>
+      <div style="position:relative;flex:1;min-height:0">
+        <div data-step="0" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:28px;opacity:0">
+          <span style="font-size:26px;font-weight:800;letter-spacing:0.12em;color:#94A6C0">PROJETO 01 / 06</span>
+          <h3 style="margin:0;font-family:Anton,sans-serif;font-size:72px;line-height:1.12;text-transform:uppercase;color:#0B4FD6;text-wrap:balance">Projeto de Criptografia</h3>
+          <p style="margin:0;font-size:38px;line-height:1.35;font-weight:600;color:#08172E;max-width:1000px">Demonstração prática de técnicas de criptografia.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px">
+            <span style="font-size:24px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#6B7B94">Ferramentas e recursos</span>
+            <div style="display:flex;flex-wrap:wrap;gap:10px"><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Apresentação</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Cifra de César</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Gamificação</span></div>
+          </div>
+        </div>
+        <div data-step="1" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:28px;opacity:0">
+          <span style="font-size:26px;font-weight:800;letter-spacing:0.12em;color:#94A6C0">PROJETO 02 / 06</span>
+          <h3 style="margin:0;font-family:Anton,sans-serif;font-size:72px;line-height:1.12;text-transform:uppercase;color:#0B4FD6;text-wrap:balance">Autenticação e suas Tecnologias</h3>
+          <p style="margin:0;font-size:38px;line-height:1.35;font-weight:600;color:#08172E;max-width:1000px">Estudo dos diferentes mecanismos de autenticação digital.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px">
+            <span style="font-size:24px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#6B7B94">Ferramentas e recursos</span>
+            <div style="display:flex;flex-wrap:wrap;gap:10px"><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Apresentação</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Quiz</span></div>
+          </div>
+        </div>
+        <div data-step="2" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:28px;opacity:0">
+          <span style="font-size:26px;font-weight:800;letter-spacing:0.12em;color:#94A6C0">PROJETO 03 / 06</span>
+          <h3 style="margin:0;font-family:Anton,sans-serif;font-size:72px;line-height:1.12;text-transform:uppercase;color:#0B4FD6;text-wrap:balance">Sensor Inteligente de Iluminação</h3>
+          <p style="margin:0;font-size:38px;line-height:1.35;font-weight:600;color:#08172E;max-width:1000px">Sistema de iluminação acionado por estímulo sonoro.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px">
+            <span style="font-size:24px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#6B7B94">Ferramentas e recursos</span>
+            <div style="display:flex;flex-wrap:wrap;gap:10px"><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Arduino</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Tinkercad</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Arduino IDE</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Sensor de ruído</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">LED</span></div>
+          </div>
+        </div>
+        <div data-step="3" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:28px;opacity:0">
+          <span style="font-size:26px;font-weight:800;letter-spacing:0.12em;color:#94A6C0">PROJETO 04 / 06</span>
+          <h3 style="margin:0;font-family:Anton,sans-serif;font-size:72px;line-height:1.12;text-transform:uppercase;color:#0B4FD6;text-wrap:balance">Projeto de Contagem de Alunos</h3>
+          <p style="margin:0;font-size:38px;line-height:1.35;font-weight:600;color:#08172E;max-width:1000px">Dispositivo para realizar a contagem de estudantes.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px">
+            <span style="font-size:24px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#6B7B94">Ferramentas e recursos</span>
+            <div style="display:flex;flex-wrap:wrap;gap:10px"><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Arduino</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Tinkercad</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Arduino IDE</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Display</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Push button</span></div>
+          </div>
+        </div>
+        <div data-step="4" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:28px;opacity:0">
+          <span style="font-size:26px;font-weight:800;letter-spacing:0.12em;color:#94A6C0">PROJETO 05 / 06</span>
+          <h3 style="margin:0;font-family:Anton,sans-serif;font-size:72px;line-height:1.12;text-transform:uppercase;color:#0B4FD6;text-wrap:balance">Horta Inteligente</h3>
+          <p style="margin:0;font-size:38px;line-height:1.35;font-weight:600;color:#08172E;max-width:1000px">Sistema automatizado de irrigação controlado pela temperatura.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px">
+            <span style="font-size:24px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#6B7B94">Ferramentas e recursos</span>
+            <div style="display:flex;flex-wrap:wrap;gap:10px"><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Arduino</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Sensor de temperatura</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Módulo relé</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Válvula solenoide</span></div>
+          </div>
+        </div>
+        <div data-step="5" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:28px;opacity:0">
+          <span style="font-size:26px;font-weight:800;letter-spacing:0.12em;color:#94A6C0">PROJETO 06 / 06</span>
+          <h3 style="margin:0;font-family:Anton,sans-serif;font-size:72px;line-height:1.12;text-transform:uppercase;color:#0B4FD6;text-wrap:balance">Óculos com Sensor de Proximidade</h3>
+          <p style="margin:0;font-size:38px;line-height:1.35;font-weight:600;color:#08172E;max-width:1000px">Dispositivo vestível para identificação de obstáculos por proximidade.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px">
+            <span style="font-size:24px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#6B7B94">Ferramentas e recursos</span>
+            <div style="display:flex;flex-wrap:wrap;gap:10px"><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Arduino</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Sensores</span><span style="background:#E8EFFC;color:#0B4FD6;padding:8px 18px;font-size:26px;font-weight:700;white-space:nowrap">Componentes eletrônicos</span></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <h2 style="margin:0;font-family:Anton,sans-serif;font-size:72px;line-height:1.12;text-transform:uppercase">Projetos desenvolvidos pelos estudantes</h2>
-    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px">
-      <div data-step-tab="0" data-tab-axis="y" style="background:#E8EFFC;color:#08172E;padding:22px 26px;display:flex;align-items:center;gap:20px;cursor:pointer;min-width:0;transition:background 300ms ease,color 300ms ease,transform 300ms ease">
-        <span style="font-family:Anton,sans-serif;font-size:44px;line-height:1;color:inherit;opacity:0.55">01</span>
-        <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
-          <span style="font-size:27px;line-height:1.2;font-weight:800;color:inherit">Criptografia</span>
-          <span style="font-size:24px;font-weight:600;color:inherit;opacity:0.7">Python e Portugol</span>
-        </div>
+    <div style="display:flex;flex-direction:column;gap:18px;min-height:0">
+      <div style="position:relative;overflow:hidden;background:#E8EFFC;flex:1;min-height:0">
+          <img src="assets/proj-c01.png" alt="Projetos dos estudantes — foto 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel10 30s ease-in-out infinite;animation-delay:0s">
+          <img src="assets/proj-c02.png" alt="Projetos dos estudantes — foto 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel10 30s ease-in-out infinite;animation-delay:3s">
+          <img src="assets/proj-c03.png" alt="Projetos dos estudantes — foto 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel10 30s ease-in-out infinite;animation-delay:6s">
+          <img src="assets/proj-c04.png" alt="Projetos dos estudantes — foto 4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel10 30s ease-in-out infinite;animation-delay:9s">
+          <img src="assets/proj-c05.png" alt="Projetos dos estudantes — foto 5" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel10 30s ease-in-out infinite;animation-delay:12s">
+          <img src="assets/proj-c06.png" alt="Projetos dos estudantes — foto 6" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel10 30s ease-in-out infinite;animation-delay:15s">
+          <img src="assets/proj-c07.png" alt="Projetos dos estudantes — foto 7" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel10 30s ease-in-out infinite;animation-delay:18s">
+          <img src="assets/proj-c08.png" alt="Projetos dos estudantes — foto 8" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel10 30s ease-in-out infinite;animation-delay:21s">
+          <img src="assets/proj-c09.png" alt="Projetos dos estudantes — foto 9" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel10 30s ease-in-out infinite;animation-delay:24s">
+          <img src="assets/proj-c10.png" alt="Projetos dos estudantes — foto 10" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:carrossel10 30s ease-in-out infinite;animation-delay:27s">
       </div>
-      <div data-step-tab="1" data-tab-axis="y" style="background:#E8EFFC;color:#08172E;padding:22px 26px;display:flex;align-items:center;gap:20px;cursor:pointer;min-width:0;transition:background 300ms ease,color 300ms ease,transform 300ms ease">
-        <span style="font-family:Anton,sans-serif;font-size:44px;line-height:1;color:inherit;opacity:0.55">02</span>
-        <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
-          <span style="font-size:27px;line-height:1.2;font-weight:800;color:inherit">Sensor Inteligente de Iluminação</span>
-          <span style="font-size:24px;font-weight:600;color:inherit;opacity:0.7">Arduino e sensores</span>
-        </div>
-      </div>
-      <div data-step-tab="2" data-tab-axis="y" style="background:#E8EFFC;color:#08172E;padding:22px 26px;display:flex;align-items:center;gap:20px;cursor:pointer;min-width:0;transition:background 300ms ease,color 300ms ease,transform 300ms ease">
-        <span style="font-family:Anton,sans-serif;font-size:44px;line-height:1;color:inherit;opacity:0.55">03</span>
-        <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
-          <span style="font-size:27px;line-height:1.2;font-weight:800;color:inherit">Contagem de Alunos</span>
-          <span style="font-size:24px;font-weight:600;color:inherit;opacity:0.7">Arduino e display LCD</span>
-        </div>
-      </div>
-      <div data-step-tab="3" data-tab-axis="y" style="background:#E8EFFC;color:#08172E;padding:22px 26px;display:flex;align-items:center;gap:20px;cursor:pointer;min-width:0;transition:background 300ms ease,color 300ms ease,transform 300ms ease">
-        <span style="font-family:Anton,sans-serif;font-size:44px;line-height:1;color:inherit;opacity:0.55">04</span>
-        <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
-          <span style="font-size:27px;line-height:1.2;font-weight:800;color:inherit">Horta Inteligente</span>
-          <span style="font-size:24px;font-weight:600;color:inherit;opacity:0.7">Tinkercad e Arduino</span>
-        </div>
-      </div>
-    </div>
-    <div style="position:relative;flex:1;min-height:0">
-      <div data-step="0" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:16px;opacity:0">
-        <div style="font-size:28px;font-weight:800;color:#08172E;text-align:center">Figura 1 – Projeto de Criptografia</div>
-        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;flex:1;min-height:0">
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-cripto-1.png" alt="Projeto de Criptografia — foto 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-cripto-2.png" alt="Projeto de Criptografia — foto 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-cripto-3.png" alt="Projeto de Criptografia — foto 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-        </div>
-        <div style="font-size:24px;color:#6B7B94">Fonte: Elaborado pelo autor (2023).</div>
-      </div>
-      <div data-step="1" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:16px;opacity:0">
-        <div style="font-size:28px;font-weight:800;color:#08172E;text-align:center">Figura 2 – Projeto Sensor Inteligente de Iluminação</div>
-        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;flex:1;min-height:0">
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-sensor-1.png" alt="Projeto Sensor Inteligente de Iluminação — foto 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-sensor-2.png" alt="Projeto Sensor Inteligente de Iluminação — foto 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-sensor-3.png" alt="Projeto Sensor Inteligente de Iluminação — foto 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-        </div>
-        <div style="font-size:24px;color:#6B7B94">Fonte: Elaborado pelo autor (2023).</div>
-      </div>
-      <div data-step="2" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:16px;opacity:0">
-        <div style="font-size:28px;font-weight:800;color:#08172E;text-align:center">Figura 3 – Projeto de Contagem de Alunos</div>
-        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;flex:1;min-height:0">
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-contagem-1.png" alt="Projeto de Contagem de Alunos — foto 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-contagem-2.png" alt="Projeto de Contagem de Alunos — foto 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-contagem-3.png" alt="Projeto de Contagem de Alunos — foto 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-        </div>
-        <div style="font-size:24px;color:#6B7B94">Fonte: Elaborado pelo autor (2023).</div>
-      </div>
-      <div data-step="3" style="position:absolute;inset:0;display:flex;flex-direction:column;gap:16px;opacity:0">
-        <div style="font-size:28px;font-weight:800;color:#08172E;text-align:center">Figura 4 – Projeto Horta Inteligente</div>
-        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;flex:1;min-height:0">
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-horta-1.png" alt="Projeto Horta Inteligente — foto 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-horta-2.png" alt="Projeto Horta Inteligente — foto 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-          <div data-pic="" style="position:relative;overflow:hidden;background:#E8EFFC;min-height:0"><img src="assets/proj-horta-3.png" alt="Projeto Horta Inteligente — foto 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" /></div>
-        </div>
-        <div style="font-size:24px;color:#6B7B94">Fonte: Elaborado pelo autor (2023).</div>
-      </div>
+      <div style="display:flex;gap:8px;align-items:center;justify-content:center"><div style="height:12px;width:12px;background:#C7DAFB;border-radius:6px;animation:carrossel10Dot 30s ease-in-out infinite;animation-delay:0s"></div><div style="height:12px;width:12px;background:#C7DAFB;border-radius:6px;animation:carrossel10Dot 30s ease-in-out infinite;animation-delay:3s"></div><div style="height:12px;width:12px;background:#C7DAFB;border-radius:6px;animation:carrossel10Dot 30s ease-in-out infinite;animation-delay:6s"></div><div style="height:12px;width:12px;background:#C7DAFB;border-radius:6px;animation:carrossel10Dot 30s ease-in-out infinite;animation-delay:9s"></div><div style="height:12px;width:12px;background:#C7DAFB;border-radius:6px;animation:carrossel10Dot 30s ease-in-out infinite;animation-delay:12s"></div><div style="height:12px;width:12px;background:#C7DAFB;border-radius:6px;animation:carrossel10Dot 30s ease-in-out infinite;animation-delay:15s"></div><div style="height:12px;width:12px;background:#C7DAFB;border-radius:6px;animation:carrossel10Dot 30s ease-in-out infinite;animation-delay:18s"></div><div style="height:12px;width:12px;background:#C7DAFB;border-radius:6px;animation:carrossel10Dot 30s ease-in-out infinite;animation-delay:21s"></div><div style="height:12px;width:12px;background:#C7DAFB;border-radius:6px;animation:carrossel10Dot 30s ease-in-out infinite;animation-delay:24s"></div><div style="height:12px;width:12px;background:#C7DAFB;border-radius:6px;animation:carrossel10Dot 30s ease-in-out infinite;animation-delay:27s"></div></div>
     </div>
   </section>
 
@@ -865,7 +907,7 @@
     </div>
   </section>
 
-  <section data-label="Considerações" data-screen-label="12" data-anim="stagger" data-in-step="220" data-speaker-notes="Fechar com a contribuição principal e os encaminhamentos de pesquisa." style="width:100%;height:100%;background:#fff;color:#08172E;font-family:Manrope,sans-serif;padding:96px 120px;box-sizing:border-box;display:flex;flex-direction:column;gap:44px">
+  <section data-label="Considerações" data-screen-label="12" data-anim="stagger" data-in-step="220" data-speaker-notes="Fechar com a contribuição principal e os encaminhamentos de pesquisa." style="width:100%;height:100%;background:#fff;color:#08172E;font-family:Manrope,sans-serif;padding:96px 120px;box-sizing:border-box;display:flex;flex-direction:column;gap:44px" data-om-slide-id="43145a65">
     <div data-in="" style="display:flex;align-items:center;gap:20px">
       <div style="width:44px;height:8px;background:#0B4FD6"></div>
       <div style="font-size:25px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#0B4FD6">Considerações finais</div>
@@ -893,35 +935,15 @@
     </div>
   </section>
 
-  <sc-if value="{{ mostrarReferencias }}" hint-placeholder-val="{{ true }}">
-  <section data-label="Referências" data-screen-label="13" data-speaker-notes="Slide de apoio para perguntas." style="width:100%;height:100%;background:#fff;color:#08172E;font-family:Manrope,sans-serif;padding:88px 120px;box-sizing:border-box;display:flex;flex-direction:column;gap:36px">
-    <div style="display:flex;align-items:center;gap:20px">
-      <div style="width:44px;height:8px;background:#0B4FD6"></div>
-      <div style="font-size:25px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#0B4FD6">Referências</div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px 64px;font-size:25px;line-height:1.45;color:#22344F">
-      <p style="margin:0">CHAN, Ka Ian; LEI, Filipe IS; PANG, Patrick Cheong-Iao. Uma revisão da literatura sobre mineração de dados educacionais com dados do ensino médio. In: Anais da 9ª Conferência Internacional sobre Tecnologias de Educação e Treinamento. 2023. p. 1-7.</p>
-      <p style="margin:0">GODOY, Arilda Schmidt. Pesquisa qualitativa: tipos fundamentais. Revista de Administração de Empresas, v. 35, p. 20-29, 1995.</p>
-      <p style="margin:0">JAKKAEW, Prasara; HEMRUNGROTE, Sirichai. The use of UTAUT2 model for understanding student perceptions using Google Classroom: a case study of introduction to information technology course. In: 2017 International Conference on Digital Arts, Media and Technology (ICDAMT). IEEE, 2017. p. 205-209.</p>
-      <p style="margin:0">KOEDINGER, Ken et al. Repositórios de dados educacionais e ferramentas de análise baseados na comunidade. In: Anais da sétima conferência internacional de análise e conhecimento de aprendizagem. 2017. p. 524.</p>
-      <p style="margin:0">MORAN, José Manuel. A integração das tecnologias na educação. Salto para o Futuro, v. 204, p. 63-91, 2005.</p>
-      <p style="margin:0">NOBRE, Alena Pimentel Mello Cabral; RODRIGUES, Cleyton Mário de Oliveira. Experiências da formação do docente do ensino superior no Google Classroom em tempos da pandemia da Covid-19. In: Anais do XXVI Workshop de Informática na Escola. SBC, 2020. p. 339-348.</p>
-      <p style="margin:0">SAINI, Mukesh Kumar; GOEL, Neeraj. How smart are smart classrooms? A review of smart classroom technologies. ACM Computing Surveys, v. 52, n. 6, p. 1-28, 2019.</p>
-    </div>
-    <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;border-top:3px solid #08172E;padding-top:28px">
-      
-      
-    </div>
-  </section>
-  </sc-if>
+  
 
-  <section data-label="Encerramento" data-screen-label="Encerramento" data-anim="stagger" data-in-step="260" data-speaker-notes="Agradecimento e contatos." style="width:100%;height:100%;background:#0B4FD6;color:#fff;font-family:Manrope,sans-serif;padding:96px 120px;box-sizing:border-box;display:flex;flex-direction:column;gap:48px">
+  <section data-label="Encerramento" data-screen-label="Encerramento" data-anim="stagger" data-in-step="260" data-speaker-notes="Agradecimento e contatos." style="width:100%;height:100%;background:#0B4FD6;color:#fff;font-family:Manrope,sans-serif;padding:96px 120px;box-sizing:border-box;display:flex;flex-direction:column;gap:48px" data-om-slide-id="e5f17599">
     <div data-in="" style="display:flex;align-items:center;justify-content:space-between;gap:40px">
       <div style="display:flex;align-items:center;gap:18px">
         <div style="width:44px;height:3px;background:#C7DAFB"></div>
         <span style="font-size:25px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#C7DAFB">Relato de experiência</span>
       </div>
-      <img src="assets/conedu-logo-branca.png" alt="XII Congresso Nacional de Educação — CONEDU" style="height:130px;width:auto;display:block" />
+      <img src="assets/conedu-logo-branca.png" alt="XII Congresso Nacional de Educação — CONEDU" style="height:130px;width:auto;display:block">
     </div>
     <h1 data-in="" style="margin:0;font-family:Anton,sans-serif;font-size:96px;line-height:1.12;text-transform:uppercase;color:#fff;max-width:1560px;text-wrap:balance">Google Classroom como estratégia pedagógica para o ensino de Segurança da Informação</h1>
     <div data-in="" style="margin-top:auto;display:flex;align-items:center;gap:48px;border-top:2px solid rgba(255,255,255,0.35);padding-top:44px">
@@ -987,60 +1009,29 @@ class Component extends DCLogic {
     if (window.__deckTabClick) document.removeEventListener('click', window.__deckTabClick, true);
     window.__deckTabClick = this._onTab;
     document.addEventListener('click', this._onTab, true);
-    this._onStepClick = (e) => {
-      const slide = document.querySelector('[data-deck-active][data-steps]');
-      if (!slide || e.defaultPrevented) return;
-      const path = e.composedPath ? e.composedPath() : [];
-      const clickedStepTab = e.target.closest && e.target.closest('[data-step-tab]');
-      if (clickedStepTab) return;
-
-      let dir = 0;
-      for (const node of path) {
-        if (!node || !node.classList) continue;
-        if (node.classList.contains('next')) { dir = 1; break; }
-        if (node.classList.contains('prev')) { dir = -1; break; }
-        if (node.classList.contains('reset')) return;
-      }
-
-      if (!dir) {
-        if (!path.includes(slide)) return;
-        dir = e.clientX < window.innerWidth / 2 ? -1 : 1;
-      }
-
-      this._stepActiveSlide(dir, e);
-    };
-    if (window.__deckStepClick) document.removeEventListener('click', window.__deckStepClick, true);
-    window.__deckStepClick = this._onStepClick;
-    document.addEventListener('click', this._onStepClick, true);
     document.addEventListener('mouseover', this._onHover, true);
     document.addEventListener('mouseout', this._onHover, true);
     this._onKey = (e) => {
+      const slide = document.querySelector('[data-deck-active][data-steps]');
+      if (!slide) return;
+      const total = parseInt(slide.getAttribute('data-steps'), 10) || 1;
+      const cur = parseInt(slide.dataset.stepIndex || '0', 10);
+      const set = (n) => {
+        slide.dataset.stepIndex = String(n);
+        this._applySteps(slide);
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        e.stopPropagation();
+      };
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
-        this._stepActiveSlide(1, e);
+        if (cur < total - 1) set(cur + 1);
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
-        this._stepActiveSlide(-1, e);
+        if (cur > 0) set(cur - 1);
       }
     };
     if (window.__deckStepKey) window.removeEventListener('keydown', window.__deckStepKey, true);
     window.__deckStepKey = this._onKey;
     window.addEventListener('keydown', this._onKey, true);
-  }
-
-  _stepActiveSlide(dir, event) {
-    const slide = document.querySelector('[data-deck-active][data-steps]');
-    if (!slide) return false;
-    const total = parseInt(slide.getAttribute('data-steps'), 10) || 1;
-    const cur = parseInt(slide.dataset.stepIndex || '0', 10);
-    const next = cur + dir;
-    if (next < 0 || next >= total) return false;
-    slide.dataset.stepIndex = String(next);
-    this._applySteps(slide);
-    if (event) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      event.stopPropagation();
-    }
-    return true;
   }
 
   _chart(slide) {
@@ -1305,7 +1296,6 @@ class Component extends DCLogic {
     (this._timers || []).forEach(clearTimeout);
     if (this._raf) cancelAnimationFrame(this._raf);
     if (this._onKey) window.removeEventListener('keydown', this._onKey, true);
-    if (this._onStepClick) document.removeEventListener('click', this._onStepClick, true);
   }
 
   _play(slide) {
