@@ -12,15 +12,54 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <style>
-  body { margin: 0; background: #08172E; }
+  html, body { width: 100%; height: 100%; margin: 0; background: #08172E; overflow: hidden; }
+  body { overscroll-behavior: none; }
   a { color: #0B4FD6; text-decoration: none; }
   a:hover { color: #072C7A; }
   @keyframes carrosselDot { 0% { background: #0B4FD6; width: 36px; } 30% { background: #0B4FD6; width: 36px; } 36% { background: #C7DAFB; width: 14px; } 100% { background: #C7DAFB; width: 14px; } }
   @keyframes carrossel { 0% { opacity: 0; transform: scale(1); } 5% { opacity: 1; } 30% { opacity: 1; } 36% { opacity: 0; transform: scale(1.1); } 100% { opacity: 0; transform: scale(1.1); } }
 </style>
 <script src="./image-slot.js"></script>
+<script>
+  (() => {
+    let applied = false;
+
+    const setPresentationMode = () => {
+      const stage = document.querySelector('deck-stage');
+      if (!stage) return false;
+      stage.setAttribute('no-rail', '');
+      window.postMessage({ __omelette_presenting: true }, '*');
+      applied = true;
+      return true;
+    };
+
+    const enterFullscreen = () => {
+      setPresentationMode();
+      if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+    };
+
+    const waitForStage = () => {
+      if (setPresentationMode()) return;
+      const observer = new MutationObserver(() => {
+        if (setPresentationMode()) observer.disconnect();
+      });
+      observer.observe(document.documentElement, { childList: true, subtree: true });
+      customElements.whenDefined('deck-stage').then(() => requestAnimationFrame(() => {
+        if (!applied) setPresentationMode();
+      }));
+    };
+
+    waitForStage();
+
+    window.addEventListener('pointerdown', enterFullscreen, { once: true, capture: true });
+    window.addEventListener('touchstart', enterFullscreen, { once: true, capture: true, passive: true });
+    window.addEventListener('keydown', enterFullscreen, { once: true, capture: true });
+  })();
+</script>
 </helmet>
-<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%" data-uneditable="">
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%" no-rail="" data-uneditable="">
 
   <section data-label="Abertura" data-screen-label="Abertura" data-anim="stagger" data-speaker-notes="Tela de abertura antes da apresentação." style="width:100%;height:100%;background:#fff;color:#08172E;font-family:Manrope,sans-serif;padding:110px 120px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:56px" data-om-slide-id="c3176813">
     <img data-in="" src="assets/conedu-logo.png" alt="XII Congresso Nacional de Educação — CONEDU" style="height:340px;width:auto;display:block">
