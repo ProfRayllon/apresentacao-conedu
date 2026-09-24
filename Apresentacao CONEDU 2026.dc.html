@@ -987,29 +987,60 @@ class Component extends DCLogic {
     if (window.__deckTabClick) document.removeEventListener('click', window.__deckTabClick, true);
     window.__deckTabClick = this._onTab;
     document.addEventListener('click', this._onTab, true);
+    this._onStepClick = (e) => {
+      const slide = document.querySelector('[data-deck-active][data-steps]');
+      if (!slide || e.defaultPrevented) return;
+      const path = e.composedPath ? e.composedPath() : [];
+      const clickedStepTab = e.target.closest && e.target.closest('[data-step-tab]');
+      if (clickedStepTab) return;
+
+      let dir = 0;
+      for (const node of path) {
+        if (!node || !node.classList) continue;
+        if (node.classList.contains('next')) { dir = 1; break; }
+        if (node.classList.contains('prev')) { dir = -1; break; }
+        if (node.classList.contains('reset')) return;
+      }
+
+      if (!dir) {
+        if (!path.includes(slide)) return;
+        dir = e.clientX < window.innerWidth / 2 ? -1 : 1;
+      }
+
+      this._stepActiveSlide(dir, e);
+    };
+    if (window.__deckStepClick) document.removeEventListener('click', window.__deckStepClick, true);
+    window.__deckStepClick = this._onStepClick;
+    document.addEventListener('click', this._onStepClick, true);
     document.addEventListener('mouseover', this._onHover, true);
     document.addEventListener('mouseout', this._onHover, true);
     this._onKey = (e) => {
-      const slide = document.querySelector('[data-deck-active][data-steps]');
-      if (!slide) return;
-      const total = parseInt(slide.getAttribute('data-steps'), 10) || 1;
-      const cur = parseInt(slide.dataset.stepIndex || '0', 10);
-      const set = (n) => {
-        slide.dataset.stepIndex = String(n);
-        this._applySteps(slide);
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        e.stopPropagation();
-      };
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
-        if (cur < total - 1) set(cur + 1);
+        this._stepActiveSlide(1, e);
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
-        if (cur > 0) set(cur - 1);
+        this._stepActiveSlide(-1, e);
       }
     };
     if (window.__deckStepKey) window.removeEventListener('keydown', window.__deckStepKey, true);
     window.__deckStepKey = this._onKey;
     window.addEventListener('keydown', this._onKey, true);
+  }
+
+  _stepActiveSlide(dir, event) {
+    const slide = document.querySelector('[data-deck-active][data-steps]');
+    if (!slide) return false;
+    const total = parseInt(slide.getAttribute('data-steps'), 10) || 1;
+    const cur = parseInt(slide.dataset.stepIndex || '0', 10);
+    const next = cur + dir;
+    if (next < 0 || next >= total) return false;
+    slide.dataset.stepIndex = String(next);
+    this._applySteps(slide);
+    if (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+    }
+    return true;
   }
 
   _chart(slide) {
@@ -1274,6 +1305,7 @@ class Component extends DCLogic {
     (this._timers || []).forEach(clearTimeout);
     if (this._raf) cancelAnimationFrame(this._raf);
     if (this._onKey) window.removeEventListener('keydown', this._onKey, true);
+    if (this._onStepClick) document.removeEventListener('click', this._onStepClick, true);
   }
 
   _play(slide) {
