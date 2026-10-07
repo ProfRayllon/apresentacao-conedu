@@ -4,9 +4,10 @@
  * Apresentador: abra  index.html?apresentador
  * Público:      abra  index.html
  *
- * O apresentador transmite (slide, passo) via WebRTC (PeerJS, sem servidor
- * próprio). Cada aparelho do público conecta-se ao navegador do apresentador
- * e acompanha a navegação. Só o apresentador passa os slides: o público
+ * O apresentador publica (slide, passo) em servidores MQTT públicos (vários
+ * ao mesmo tempo, para um cair sem parar a transmissão); o público assina o
+ * mesmo tópico e acompanha. A mensagem fica retida, então quem entra depois
+ * já cai no slide atual. Só o apresentador passa os slides: o público
  * não navega por toque, teclado nem pelas abas.
  *
  * No celular em pé, o canvas vira vertical (720px de largura) e o
@@ -18,15 +19,23 @@
   window.__aoVivo = true;
 
   const params = new URLSearchParams(location.search);
-  const ROOM = 'conedu2026-rayllon-' + (params.get('sala') || 'principal');
+  const ROOM = 'conedu2026/rayllon/' + (params.get('sala') || 'principal');
+  const T_STATE = ROOM + '/estado';    // retido: slide atual + batimento
+  const T_HELLO = ROOM + '/publico';   // público avisa que está assistindo
   const IS_PRESENTER = params.has('apresentador');
-  const PEERJS_SRC = 'https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js';
+  const MQTT_SRC = 'https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js';
+  const BROKERS = [
+    'wss://broker.emqx.io:8084/mqtt',
+    'wss://test.mosquitto.org:8081/mqtt',
+    'wss://broker.hivemq.com:8884/mqtt',
+  ];
+  const BEAT_MS = 5000;
   const COARSE = matchMedia('(pointer: coarse)');
 
   let stage = null;
   const V_WIDTH = 720;
   let applying = false;      // true enquanto aplicamos estado vindo da rede
-  let connected = false;     // público: conexão com o apresentador aberta
+  let connected = false;     // público: recebendo o apresentador
 
   // ── Estilos ───────────────────────────────────────────────────────────
   const css = document.createElement('style');
@@ -37,7 +46,7 @@
       display: flex; align-items: center; gap: 8px; padding: 7px 14px;
       font: 700 13px/1 Manrope, system-ui, sans-serif; letter-spacing: .04em;
       color: #fff; background: rgba(8,23,46,.82); border: 1px solid rgba(255,255,255,.18);
-      border-radius: 999px; user-select: none; -webkit-user-select: none;
+      border-radius: 999px; cursor: pointer; user-select: none; -webkit-user-select: none;
       transition: opacity .4s ease;
     }
     #av-pill i { width: 9px; height: 9px; border-radius: 50%; background: #8A97AB; }
@@ -185,31 +194,77 @@
   };
 
   // ── Rede ──────────────────────────────────────────────────────────────
-  const loadPeer = () => new Promise((resolve, reject) => {
-    if (window.Peer) return resolve(window.Peer);
+  const loadMqtt = () => new Promise((resolve, reject) => {
+    if (window.mqtt) return resolve(window.mqtt);
     const s = document.createElement('script');
-    s.src = PEERJS_SRC;
-    s.onload = () => resolve(window.Peer);
+    s.src = MQTT_SRC;
+    s.onload = () => resolve(window.mqtt);
     s.onerror = reject;
     document.head.appendChild(s);
   });
 
-  const startPresenter = async (Peer) => {
-    const conns = new Set();
+  // Uma conexão por servidor; cada uma se reconecta sozinha a cada 3s.
+  // reset() derruba e recria todas (toque no selo).
+  const openBrokers = (mqtt, onMessage, onChange) => {
+    let clients = [];
+    const open = () => {
+      clients = BROKERS.map((url) => {
+        const c = mqtt.connect(url, {
+          clientId: 'av-' + Math.random().toString(36).slice(2, 12),
+          reconnectPeriod: 3000, connectTimeout: 8000, keepalive: 30, clean: true,
+        });
+        c.on('connect', () => onChange(c, true));
+        c.on('close', () => onChange(c, false));
+        c.on('offline', () => onChange(c, false));
+        c.on('error', () => {});
+        c.on('message', (topic, buf) => {
+          let msg;
+          try { msg = JSON.parse(buf.toString()); } catch (e) { return; }
+          onMessage(topic, msg);
+        });
+        return c;
+      });
+    };
+    open();
+    return {
+      live: () => clients.filter((c) => c.connected),
+      reset: () => { clients.forEach((c) => c.end(true)); open(); },
+    };
+  };
+
+  const startPresenter = (mqtt) => {
+    const viewers = new Map();  // id do público → último aviso
+    let net = null;
     let dimTimer;
-    const render = (msg) => {
-      setPill('live', msg || `APRESENTADOR · ${conns.size} conectado${conns.size === 1 ? '' : 's'}`);
+    const render = () => {
+      const now = Date.now();
+      viewers.forEach((t, id) => { if (now - t > 3 * BEAT_MS + 2000) viewers.delete(id); });
+      const up = net ? net.live().length : 0;
+      if (!up) {
+        setPill('off', 'SEM CONEXÃO · toque p/ reconectar');
+        pill.removeAttribute('data-dim');
+        clearTimeout(dimTimer);
+        return;
+      }
+      const n = viewers.size;
+      const msg = `APRESENTADOR · ${n} assistindo`;
+      if (pill.dataset.s === 'live' && pill.textContent === msg) return;
+      setPill('live', msg);
       pill.removeAttribute('data-dim');
       clearTimeout(dimTimer);
       dimTimer = setTimeout(() => pill.setAttribute('data-dim', ''), 4000);
     };
+    const publish = (clients) => {
+      const st = { ...readState(), t: Date.now() };
+      const body = JSON.stringify(st);
+      clients.forEach((c) => c.publish(T_STATE, body, { qos: 0, retain: true }));
+    };
     let last = '';
-    const broadcast = (force) => {
-      const st = readState();
-      const msg = JSON.stringify(st);
-      if (!force && msg === last) return;
+    const broadcast = () => {
+      const msg = JSON.stringify(readState());
+      if (msg === last) return;
       last = msg;
-      conns.forEach((c) => { if (c.open) c.send(st); });
+      publish(net.live());
     };
     let queued = false;
     const schedule = () => {
@@ -217,32 +272,20 @@
       queued = true;
       queueMicrotask(() => { queued = false; broadcast(); });
     };
+    net = openBrokers(mqtt, (topic, m) => {
+      if (topic === T_HELLO && m && m.id) { viewers.set(m.id, Date.now()); render(); }
+    }, (c, up) => {
+      if (up) { c.subscribe(T_HELLO); publish([c]); }
+      render();
+    });
     stage.addEventListener('slidechange', schedule);
     new MutationObserver(schedule).observe(stage, {
       subtree: true, attributes: true, attributeFilter: ['data-step-index'],
     });
-
-    const connect = () => {
-      const peer = new Peer(ROOM);
-      peer.on('open', () => render());
-      peer.on('connection', (c) => {
-        c.on('open', () => { conns.add(c); c.send(readState()); render(); });
-        c.on('close', () => { conns.delete(c); render(); });
-        c.on('error', () => { conns.delete(c); render(); });
-      });
-      peer.on('disconnected', () => { render('RECONECTANDO…'); try { peer.reconnect(); } catch (e) {} });
-      peer.on('error', (err) => {
-        if (err.type === 'unavailable-id') {
-          render('SALA EM USO — feche outra aba de apresentador');
-          setTimeout(() => { peer.destroy(); connect(); }, 5000);
-        } else if (err.type === 'network' || err.type === 'server-error' || err.type === 'socket-error') {
-          render('SEM CONEXÃO — tentando de novo…');
-          setTimeout(() => { peer.destroy(); connect(); }, 4000);
-        }
-      });
-    };
-    render('CONECTANDO…');
-    connect();
+    // Batimento: reenvia o estado para o público saber que estamos no ar.
+    setInterval(() => { publish(net.live()); render(); }, BEAT_MS);
+    pill.addEventListener('click', () => { setPill('off', 'RECONECTANDO…'); net.reset(); });
+    render();
   };
 
   const renderViewerPill = () => {
@@ -250,35 +293,36 @@
     else setPill('live', 'AO VIVO');
   };
 
-  const startViewer = (Peer) => {
-    let peer = null;
-    let retry;
-    const again = (ms) => {
-      clearTimeout(retry);
-      retry = setTimeout(join, ms);
+  const startViewer = (mqtt) => {
+    const me = Math.random().toString(36).slice(2, 12);
+    let lastT = 0;        // carimbo do último estado aplicado
+    let lastSeen = 0;     // quando recebemos algo do apresentador
+    const check = () => {
+      const now = connected;
+      connected = Date.now() - lastSeen < 3 * BEAT_MS;
+      if (now !== connected) renderViewerPill();
     };
-    const join = () => {
-      if (!peer || peer.destroyed) {
-        peer = new Peer();
-        peer.on('open', join);
-        peer.on('disconnected', () => { try { peer.reconnect(); } catch (e) {} });
-        peer.on('error', (err) => {
-          if (err.type === 'peer-unavailable') again(3000);
-          else { connected = false; renderViewerPill(); peer.destroy(); again(4000); }
-        });
-        return;
+    const net = openBrokers(mqtt, (topic, m) => {
+      if (topic !== T_STATE || !m || typeof m.t !== 'number') return;
+      if (m.t < lastT) return;                     // mesma mensagem por outro servidor
+      // Mensagem retida antiga (apresentador fora do ar) só posiciona o slide.
+      if (Date.now() - m.t < 60000) lastSeen = Date.now();
+      const changed = m.t !== lastT;
+      lastT = m.t;
+      if (changed) applyState(m);
+      check();
+    }, (c, up) => {
+      if (up) {
+        c.subscribe(T_STATE);
+        c.publish(T_HELLO, JSON.stringify({ id: me }));
       }
-      if (!peer.open) return;
-      const c = peer.connect(ROOM, { reliable: true });
-      c.on('open', () => { connected = true; renderViewerPill(); });
-      c.on('data', (st) => {
-        applyState(st);
-      });
-      c.on('close', () => { connected = false; renderViewerPill(); again(2000); });
-      c.on('error', () => { connected = false; renderViewerPill(); again(3000); });
-    };
+    });
+    setInterval(() => {
+      net.live().forEach((c) => c.publish(T_HELLO, JSON.stringify({ id: me })));
+      check();
+    }, BEAT_MS);
+    pill.addEventListener('click', () => { if (!connected) net.reset(); });
     renderViewerPill();
-    join();
   };
 
   // ── Inicialização ─────────────────────────────────────────────────────
@@ -293,9 +337,9 @@
     window.addEventListener('resize', layout);
     COARSE.addEventListener && COARSE.addEventListener('change', layout);
 
-    loadPeer().then((Peer) => {
-      if (IS_PRESENTER) startPresenter(Peer);
-      else startViewer(Peer);
+    loadMqtt().then((mqtt) => {
+      if (IS_PRESENTER) startPresenter(mqtt);
+      else startViewer(mqtt);
     }).catch(() => setPill('off', 'SEM CONEXÃO AO VIVO'));
   };
 
