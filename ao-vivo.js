@@ -47,6 +47,14 @@
     #av-pill[data-s="free"] i { background: #F5A524; }
     #av-pill[data-dim] { opacity: .25; }
     @keyframes av-pulse { 50% { opacity: .35; } }
+    #av-full {
+      position: absolute; top: 12px; left: 12px; pointer-events: auto;
+      width: 36px; height: 36px; padding: 0; display: none; place-items: center;
+      color: #fff; background: rgba(8,23,46,.82); border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%; cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    #av-full svg { width: 18px; height: 18px; }
+    #av-full.on { display: grid; }
   `;
   document.head.appendChild(css);
   const vcss = document.createElement('link');
@@ -60,6 +68,32 @@
   pill.id = 'av-pill';
   pill.innerHTML = '<i></i><span></span>';
   layer.appendChild(pill);
+
+  // Botão de tela cheia (só em telas de toque; o iPhone não tem a API e fica sem)
+  const ICON_ENTER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  const ICON_EXIT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
+  const root = document.documentElement;
+  const fsElement = () => document.fullscreenElement || document.webkitFullscreenElement;
+  const fsEnter = root.requestFullscreen || root.webkitRequestFullscreen;
+  const fsExit = document.exitFullscreen || document.webkitExitFullscreen;
+  const full = document.createElement('button');
+  full.id = 'av-full';
+  full.type = 'button';
+  full.setAttribute('aria-label', 'Tela cheia');
+  layer.appendChild(full);
+  const renderFull = () => {
+    full.classList.toggle('on', !!fsEnter && COARSE.matches);
+    full.innerHTML = fsElement() ? ICON_EXIT : ICON_ENTER;
+  };
+  full.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (fsElement()) fsExit.call(document);
+    else Promise.resolve(fsEnter.call(root, { navigationUI: 'hide' })).catch(() => {});
+  });
+  document.addEventListener('fullscreenchange', renderFull);
+  document.addEventListener('webkitfullscreenchange', renderFull);
+  COARSE.addEventListener && COARSE.addEventListener('change', renderFull);
+  renderFull();
 
   const setPill = (state, text) => {
     pill.dataset.s = state;
