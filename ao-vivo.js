@@ -9,7 +9,8 @@
  * e acompanha a navegação. O público pode tocar no selo "AO VIVO" para
  * navegar sozinho e tocar de novo para voltar a acompanhar.
  *
- * No celular em pé, a apresentação é girada 90° para ocupar a tela toda.
+ * No celular em pé, o canvas vira vertical (720px de largura) e o
+ * vertical.css reorganiza cada slide em coluna.
  */
 (() => {
   // O runtime da apresentação pode reavaliar scripts do <helmet>.
@@ -23,7 +24,7 @@
   const COARSE = matchMedia('(pointer: coarse)');
 
   let stage = null;
-  let rotated = false;
+  const V_WIDTH = 720;
   let applying = false;      // true enquanto aplicamos estado vindo da rede
   let following = true;      // público: acompanhando o apresentador
   let connected = false;     // público: conexão com o apresentador aberta
@@ -32,10 +33,6 @@
   // ── Estilos ───────────────────────────────────────────────────────────
   const css = document.createElement('style');
   css.textContent = `
-    deck-stage.av-rot, #av-layer.av-rot {
-      inset: auto !important; top: 0 !important; left: 0 !important;
-      transform-origin: top left;
-    }
     #av-layer { position: fixed; inset: 0; pointer-events: none; z-index: 2147483600; }
     #av-pill {
       position: absolute; top: 12px; right: 12px; pointer-events: auto;
@@ -52,6 +49,10 @@
     @keyframes av-pulse { 50% { opacity: .35; } }
   `;
   document.head.appendChild(css);
+  const vcss = document.createElement('link');
+  vcss.rel = 'stylesheet';
+  vcss.href = './vertical.css';
+  document.head.appendChild(vcss);
 
   const layer = document.createElement('div');
   layer.id = 'av-layer';
@@ -132,10 +133,7 @@
     e.preventDefault();
     e.stopImmediatePropagation();
     if (locked()) return;
-    if (!dir) {
-      const half = rotated ? window.innerHeight / 2 : window.innerWidth / 2;
-      dir = (rotated ? e.clientY : e.clientX) < half ? -1 : 1;
-    }
+    if (!dir) dir = e.clientX < window.innerWidth / 2 ? -1 : 1;
     press(dir);
   }, true);
 
@@ -147,29 +145,19 @@
     renderViewerPill();
   });
 
-  // ── Modo celular: girar em retrato ────────────────────────────────────
+  // ── Modo celular: canvas vertical em retrato ──────────────────────────
+  let landscape = null; // tamanho original do canvas (width/height do deck)
   const layout = () => {
     if (!stage) return;
+    if (!landscape) landscape = [stage.getAttribute('width'), stage.getAttribute('height')];
     const W = window.innerWidth, H = window.innerHeight;
-    const want = COARSE.matches && H > W;
-    rotated = want;
-    [stage, layer].forEach((el) => {
-      el.classList.toggle('av-rot', want);
-      el.style.width = want ? H + 'px' : '';
-      el.style.height = want ? W + 'px' : '';
-      el.style.transform = want ? `translateX(${W}px) rotate(90deg)` : '';
-    });
-    stage._fit();
-  };
-
-  const patchFit = () => {
-    const orig = stage._fit.bind(stage);
-    stage._fit = () => {
-      orig();
-      if (!rotated || !stage._canvas || stage.hasAttribute('noscale')) return;
-      const s = Math.min(window.innerHeight / stage.designWidth, window.innerWidth / stage.designHeight);
-      stage._canvas.style.transform = `scale(${s})`;
-    };
+    const vertical = H > W && W <= 900;
+    document.documentElement.classList.toggle('av-vertical', vertical);
+    const w = vertical ? String(V_WIDTH) : landscape[0];
+    const h = vertical ? String(Math.max(1100, Math.round(V_WIDTH * H / W))) : landscape[1];
+    document.documentElement.classList.toggle('av-short', vertical && Number(h) < 1400);
+    if (stage.getAttribute('width') !== w) stage.setAttribute('width', w);
+    if (stage.getAttribute('height') !== h) stage.setAttribute('height', h);
   };
 
   // ── Rede ──────────────────────────────────────────────────────────────
@@ -279,7 +267,6 @@
       return;
     }
     document.body.appendChild(layer);
-    patchFit();
     layout();
     window.addEventListener('resize', layout);
     COARSE.addEventListener && COARSE.addEventListener('change', layout);
