@@ -6,8 +6,8 @@
  *
  * O apresentador transmite (slide, passo) via WebRTC (PeerJS, sem servidor
  * próprio). Cada aparelho do público conecta-se ao navegador do apresentador
- * e acompanha a navegação. O público pode tocar no selo "AO VIVO" para
- * navegar sozinho e tocar de novo para voltar a acompanhar.
+ * e acompanha a navegação. Só o apresentador passa os slides: o público
+ * não navega por toque, teclado nem pelas abas.
  *
  * No celular em pé, o canvas vira vertical (720px de largura) e o
  * vertical.css reorganiza cada slide em coluna.
@@ -26,9 +26,7 @@
   let stage = null;
   const V_WIDTH = 720;
   let applying = false;      // true enquanto aplicamos estado vindo da rede
-  let following = true;      // público: acompanhando o apresentador
   let connected = false;     // público: conexão com o apresentador aberta
-  let lastRemote = null;     // público: último estado recebido
 
   // ── Estilos ───────────────────────────────────────────────────────────
   const css = document.createElement('style');
@@ -39,12 +37,11 @@
       display: flex; align-items: center; gap: 8px; padding: 7px 14px;
       font: 700 13px/1 Manrope, system-ui, sans-serif; letter-spacing: .04em;
       color: #fff; background: rgba(8,23,46,.82); border: 1px solid rgba(255,255,255,.18);
-      border-radius: 999px; cursor: pointer; user-select: none; -webkit-user-select: none;
+      border-radius: 999px; user-select: none; -webkit-user-select: none;
       transition: opacity .4s ease;
     }
     #av-pill i { width: 9px; height: 9px; border-radius: 50%; background: #8A97AB; }
     #av-pill[data-s="live"] i { background: #E5484D; animation: av-pulse 1.6s infinite; }
-    #av-pill[data-s="free"] i { background: #F5A524; }
     #av-pill[data-dim] { opacity: .25; }
     @keyframes av-pulse { 50% { opacity: .35; } }
     #av-full {
@@ -137,12 +134,12 @@
     }
   };
 
-  const locked = () => !IS_PRESENTER && following && connected;
+  const locked = () => !IS_PRESENTER;
 
   // ── Entrada do usuário (registrado antes dos outros scripts) ──────────
   window.addEventListener('keydown', (e) => {
     if (applying || !locked()) return;
-    if (/^(Arrow|Page|Home|End| |[0-9]|r|R)/.test(e.key)) {
+    if (/^(Arrow|Page|Home|End| |Spacebar|[0-9]|r|R)/.test(e.key)) {
       e.preventDefault();
       e.stopImmediatePropagation();
     }
@@ -156,7 +153,8 @@
     for (const n of path) {
       if (n === stage) break;
       if (!n.matches) continue;
-      if (n.matches('a[href], [data-step-tab]')) { link = true; break; }
+      if (n.matches('[data-step-tab]')) { if (locked()) break; link = true; break; }
+      if (n.matches('a[href]')) { link = true; break; }
       if (n.matches('.next')) { dir = 1; break; }
       if (n.matches('.prev')) { dir = -1; break; }
       if (n.matches('button, input, select, textarea')) { link = true; break; }
@@ -170,14 +168,6 @@
     if (!dir) dir = e.clientX < window.innerWidth / 2 ? -1 : 1;
     press(dir);
   }, true);
-
-  pill.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (IS_PRESENTER) return;
-    following = !following;
-    if (following && lastRemote) applyState(lastRemote);
-    renderViewerPill();
-  });
 
   // ── Modo celular: canvas vertical em retrato ──────────────────────────
   let landscape = null; // tamanho original do canvas (width/height do deck)
@@ -257,8 +247,7 @@
 
   const renderViewerPill = () => {
     if (!connected) setPill('off', 'AGUARDANDO APRESENTADOR');
-    else if (following) setPill('live', 'AO VIVO');
-    else setPill('free', 'NAVEGANDO SOZINHO · toque p/ voltar');
+    else setPill('live', 'AO VIVO');
   };
 
   const startViewer = (Peer) => {
@@ -283,8 +272,7 @@
       const c = peer.connect(ROOM, { reliable: true });
       c.on('open', () => { connected = true; renderViewerPill(); });
       c.on('data', (st) => {
-        lastRemote = st;
-        if (following) applyState(st);
+        applyState(st);
       });
       c.on('close', () => { connected = false; renderViewerPill(); again(2000); });
       c.on('error', () => { connected = false; renderViewerPill(); again(3000); });
