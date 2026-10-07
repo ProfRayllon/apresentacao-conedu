@@ -55,8 +55,8 @@ html.av-vertical section[data-label="Coautora"] [style*="grid-template-columns: 
 html.av-vertical section[data-label="Apresentador"] [style*="grid-template-columns: 24px 1fr"] span { font-size: 25px !important; }
 html.av-vertical section[data-label="Coautora"] [style*="grid-template-columns: 24px 1fr"] span { font-size: 23px !important; }
 html.av-vertical section[data-label="Coautora"] [style*="grid-template-columns: 24px 1fr"] > div { margin-top: 14px !important; }
-html.av-vertical section[data-label="Apresentador"] [style*="background: rgb(232, 239, 252)"],
-html.av-vertical section[data-label="Coautora"] [style*="background: rgb(232, 239, 252)"] { padding: 20px 24px !important; }
+html.av-vertical section[data-label="Apresentador"] [style*="background: rgb(232, 239, 252)"]:not([data-in-photo] *),
+html.av-vertical section[data-label="Coautora"] [style*="background: rgb(232, 239, 252)"]:not([data-in-photo] *) { padding: 20px 24px !important; }
 html.av-vertical section[data-label="Apresentador"] [style*="flex-wrap: nowrap"] { flex-wrap: wrap !important; }
 
 /* ── Capa ─────────────────────────────────────────────────────────────── */
@@ -239,7 +239,7 @@ html.av-vertical.av-short section[data-label="Coautora"] > div:first-child { gap
 html.av-vertical.av-short section[data-label="Coautora"] h2 { font-size: 48px !important; }
 html.av-vertical.av-short section[data-label="Coautora"] [style*="grid-template-columns: 24px 1fr"] span { font-size: 22px !important; }
 html.av-vertical.av-short section[data-label="Coautora"] [style*="grid-template-columns: 24px 1fr"] > div { margin-top: 13px !important; }
-html.av-vertical.av-short section[data-label="Coautora"] [style*="background: rgb(232, 239, 252)"] { padding: 14px 20px !important; gap: 4px !important; }
+html.av-vertical.av-short section[data-label="Coautora"] [style*="background: rgb(232, 239, 252)"]:not([data-in-photo] *) { padding: 14px 20px !important; gap: 4px !important; }
 html.av-vertical.av-short section[data-label="Apresentador"],
 html.av-vertical.av-short section[data-label="Coautora"] { padding: 88px 44px 32px !important; }
 html.av-vertical.av-short section[data-label="Coautora"] [style*="grid-template-columns: 24px 1fr"] span { line-height: 1.3 !important; }
