@@ -24,10 +24,13 @@
   const T_HELLO = ROOM + '/publico';   // público avisa que está assistindo
   const IS_PRESENTER = params.has('apresentador');
   const MQTT_SRC = 'https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js';
+  // shiftr.io usa a porta 443, que passa em redes de celular e Wi-Fi que
+  // bloqueiam as portas 8084/8081/8884 dos demais.
   const BROKERS = [
-    'wss://broker.emqx.io:8084/mqtt',
-    'wss://test.mosquitto.org:8081/mqtt',
-    'wss://broker.hivemq.com:8884/mqtt',
+    ['wss://public.cloud.shiftr.io', { username: 'public', password: 'public' }],
+    ['wss://broker.emqx.io:8084/mqtt'],
+    ['wss://test.mosquitto.org:8081/mqtt'],
+    ['wss://broker.hivemq.com:8884/mqtt'],
   ];
   const BEAT_MS = 5000;
   const COARSE = matchMedia('(pointer: coarse)');
@@ -65,7 +68,7 @@
   document.head.appendChild(css);
   const vcss = document.createElement('link');
   vcss.rel = 'stylesheet';
-  vcss.href = './vertical.css';
+  vcss.href = './vertical.css?v=4';
   document.head.appendChild(vcss);
 
   const layer = document.createElement('div');
@@ -208,8 +211,9 @@
   const openBrokers = (mqtt, onMessage, onChange) => {
     let clients = [];
     const open = () => {
-      clients = BROKERS.map((url) => {
+      clients = BROKERS.map(([url, auth]) => {
         const c = mqtt.connect(url, {
+          ...auth,
           clientId: 'av-' + Math.random().toString(36).slice(2, 12),
           reconnectPeriod: 3000, connectTimeout: 8000, keepalive: 30, clean: true,
         });
